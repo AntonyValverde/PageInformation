@@ -1,5 +1,5 @@
-import React from "react"
+import React from "react";
 
 export default function Loading() {
-  return <div className="font-bold text-3xl">Loading...</div>
+  return <div className="font-bold text-3xl text-center">Loading...</div>;
 }
