@@ -3,6 +3,7 @@ import './App.css';
 import PageHead from './components/PageHead';
 import Loading from "./components/Loading";
 import Profile from './components/profile';
+import OtherSkills from "./components/curses";
 import 'tailwindcss/tailwind.css';
 import { FaJava, FaPython, FaHtml5, FaCss3Alt, FaPhp, FaBootstrap, FaJs, FaReact, FaDatabase } from 'react-icons/fa';
 import { FaPhoneAlt, FaEnvelope, FaUniversity, FaGithub, FaLinkedin, FaInstagram, FaFacebook } from 'react-icons/fa';
@@ -13,6 +14,8 @@ function App() {
   const [personalRepos, setPersonalRepos] = useState([]);
   const [collaborations, setCollaborations] = useState([]);
   const [user] = useState("AntonyValverde");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
 
   useEffect(() => {
     const fetchRepos = async () => {
@@ -43,6 +46,16 @@ function App() {
     fetchRepos();
     fetchCollaborations();
   }, [user]);
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedImage("");
+  };
 
   return (
     <div className="bg-gradient-to-r from-blue-200 to-indigo-200 min-h-screen flex flex-col">
@@ -160,7 +173,37 @@ function App() {
             </div>
           </article>
         </section>
+        <h2 className="text-3xl font-extrabold text-indigo-600 mb-4 text-center mt-8">Otros Aprendizajes</h2>
+        <section className="bg-white rounded-lg shadow-xl p-6 mb-4">
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <div className="flex flex-col items-center">
+              <div className="bg-blue-100 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer" onClick={() => handleImageClick('/titulos/LinuxUnhatched.jpeg')}>
+                <p className="text-lg text-blue-600 underline">Linux Unhatched</p>
+              </div>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="bg-blue-100 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer" onClick={() => handleImageClick('/titulos/LinuxEssentials.jpeg')}>
+                <p className="text-lg text-blue-600 underline">Linux Essentials</p>
+              </div>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="bg-blue-100 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer" onClick={() => handleImageClick('path/to/your/image3.jpg')}>
+                <p className="text-lg text-blue-600 underline">Título 3</p>
+              </div>
+            </div>
+            {/* Agrega más enlaces a imágenes según sea necesario */}
+          </div>
+        </section>
       </main>
+      {modalOpen && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center" onClick={closeModal}>
+    <div className="bg-white p-4 rounded-lg shadow-lg max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
+      <img src={selectedImage} alt="Aprendizaje" className="rounded-lg mt-4 w-full" />
+    </div>
+  </div>
+)}
+
+
       <footer className="bg-gradient-to-r from-purple-600 to-red-600 text-white p-8 text-center mt-auto">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row justify-around items-center mb-4">
