@@ -7,6 +7,7 @@ import OtherSkills from "./components/curses";
 import 'tailwindcss/tailwind.css';
 import { FaJava, FaPython, FaHtml5, FaCss3Alt, FaPhp, FaBootstrap, FaJs, FaReact, FaDatabase } from 'react-icons/fa';
 import { FaPhoneAlt, FaEnvelope, FaUniversity, FaGithub, FaLinkedin, FaInstagram, FaFacebook } from 'react-icons/fa';
+import {  SiC, SiCplusplus, SiCsharp } from 'react-icons/si';
 import { SiTypescript, SiDart, SiFirebase, SiMongodb, SiMariadb, SiOracle, SiMysql } from 'react-icons/si';
 
 function App() {
@@ -129,6 +130,18 @@ function App() {
                 <SiDart className="text-5xl text-blue-600" />
                 <p className="text-lg mt-2">Dart</p>
               </div>
+              <div className="flex flex-col items-center">
+                <SiC className="text-5xl text-blue-600" />
+                <p className="text-lg mt-2">C</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <SiCplusplus className="text-5xl text-blue-600" />
+                <p className="text-lg mt-2">C++</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <SiCsharp className="text-5xl text-blue-600" />
+                <p className="text-lg mt-2">C#</p>
+              </div>
             </div>
           </div>
         </section>
@@ -196,12 +209,12 @@ function App() {
         </section>
       </main>
       {modalOpen && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center" onClick={closeModal}>
-    <div className="bg-white p-4 rounded-lg shadow-lg max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
-      <img src={selectedImage} alt="Aprendizaje" className="rounded-lg mt-4 w-full" />
-    </div>
-  </div>
-)}
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center" onClick={closeModal}>
+          <div className="bg-white p-4 rounded-lg shadow-lg max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
+            <img src={selectedImage} alt="Aprendizaje" className="rounded-lg mt-4 w-full" />
+          </div>
+        </div>
+      )}
 
 
       <footer className="bg-gradient-to-r from-purple-600 to-red-600 text-white p-8 text-center mt-auto">
