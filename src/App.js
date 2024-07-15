@@ -3,11 +3,10 @@ import './App.css';
 import PageHead from './components/PageHead';
 import Loading from "./components/Loading";
 import Profile from './components/profile';
-import OtherSkills from "./components/curses";
 import 'tailwindcss/tailwind.css';
-import { FaJava, FaPython, FaHtml5, FaCss3Alt, FaPhp, FaBootstrap, FaJs, FaReact, FaDatabase } from 'react-icons/fa';
+import { FaJava, FaPython, FaHtml5, FaCss3Alt, FaPhp, FaBootstrap, FaJs } from 'react-icons/fa';
 import { FaPhoneAlt, FaEnvelope, FaUniversity, FaGithub, FaLinkedin, FaInstagram, FaFacebook } from 'react-icons/fa';
-import {  SiC, SiCplusplus, SiCsharp } from 'react-icons/si';
+import { SiC, SiCplusplus, SiCsharp } from 'react-icons/si';
 import { SiTypescript, SiDart, SiFirebase, SiMongodb, SiMariadb, SiOracle, SiMysql } from 'react-icons/si';
 
 function App() {
@@ -77,6 +76,76 @@ function App() {
         </div>
       </nav>
       <main className="container mx-auto p-4">
+        <section className="servicios bg-white rounded-lg shadow-xl p-6 mb-4">
+          <h2 className="text-3xl font-extrabold text-indigo-600 mb-4 text-center">Mis Servicios</h2>
+          <ul className="list-disc pl-6 text-lg">
+            <li>Desarrollo de aplicaciones web</li>
+            <li>Desarrollo de aplicaciones móviles</li>
+            <li>Soporte técnico</li>
+            <li>Sistemas contables</li>
+            <li>Base de datos</li>
+            <li>Programación de páginas informativas</li>
+          </ul>
+        </section>
+        <section className="precios bg-white rounded-lg shadow-xl p-6 mb-4">
+          <h2 className="text-3xl font-extrabold text-indigo-600 mb-4 text-center">Desglose de Precios</h2>
+          <ul className="list-disc pl-6 text-lg">
+            <li>
+              Desarrollo de aplicaciones web:
+              <ul className="list-disc pl-6 text-lg">
+                <li>$1500 - incluye diseño, desarrollo y pruebas exhaustivas</li>
+                <li>- Diseño: $500</li>
+                <li>- Desarrollo: $500</li>
+                <li>- Pruebas exhaustivas: $500</li>
+              </ul>
+            </li>
+            <li>
+              Desarrollo de aplicaciones móviles:
+              <ul className="list-disc pl-6 text-lg">
+                <li>$2000 - incluye diseño, desarrollo y pruebas en múltiples dispositivos</li>
+                <li>- Diseño: $700</li>
+                <li>- Desarrollo: $700</li>
+                <li>- Pruebas en múltiples dispositivos: $600</li>
+              </ul>
+            </li>
+            <li>
+              Soporte técnico: $20 por hora - incluye resolución de problemas y mantenimiento
+              <ul className="list-disc pl-6 text-lg">
+                <li>Costo por hora: $20</li>
+                <li>Ejemplo de servicio: Resolución de problemas: 2 horas = $40</li>
+                <li>Cambios de componentes: $50</li>
+              </ul>
+            </li>
+            <li>
+              Sistemas contables: $2500 - incluye análisis, desarrollo y soporte post-implementación
+              <ul className="list-disc pl-6 text-lg">
+                <li>Análisis: $700</li>
+                <li>Desarrollo: $1200</li>
+                <li>Soporte post-implementación: $600</li>
+              </ul>
+            </li>
+            <li>
+              Base de datos: $1000 - incluye diseño y optimización de bases de datos
+              <ul className="list-disc pl-6 text-lg">
+                <li>Diseño: $400</li>
+                <li>Optimización: $600</li>
+              </ul>
+            </li>
+            <li>
+              Programación de páginas informativas: $800 - incluye diseño, desarrollo y SEO básico
+              <ul className="list-disc pl-6 text-lg">
+                <li>Diseño: $300</li>
+                <li>Desarrollo: $400</li>
+                <li>SEO básico: $100</li>
+              </ul>
+            </li>
+          </ul>
+          <div className="mt-4 text-center text-gray-700">
+            <p>Incluimos rebajas de hasta el 30% en servicios combinados.</p>
+            {/* Calcula el total y muéstralo aquí */}
+          </div>
+        </section>
+
         <section className="bg-white rounded-lg shadow-xl p-6 mb-4">
           <div className="flex flex-col items-center">
             <div className="text-center">
