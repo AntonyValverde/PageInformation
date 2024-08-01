@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import './App.css';
 import PageHead from './components/PageHead';
 import Loading from "./components/Loading";
-import Profile from './components/profile';  // Asegúrate de que este nombre coincida con el archivo
+import Profile from './components/profile';
 import 'tailwindcss/tailwind.css';
 import { FaJava, FaPython, FaHtml5, FaCss3Alt, FaPhp, FaBootstrap, FaJs } from 'react-icons/fa';
 import { FaPhoneAlt, FaEnvelope, FaUniversity, FaGithub, FaLinkedin, FaInstagram, FaFacebook } from 'react-icons/fa';
@@ -81,6 +81,21 @@ function App() {
         </div>
       </nav>
       <main className="container mx-auto p-4">
+        <section className="conocimientos bg-white rounded-lg shadow-xl p-6 mb-4">
+          <h2 className="text-3xl font-extrabold text-indigo-600 mb-4 text-center">Mis Conocimientos</h2>
+          <ul className="list-disc pl-6 text-lg">
+            <li>Manejo de ficheros</li>
+            <li>Manejo de bases de datos</li>
+            <li>Creación de juegos</li>
+            <li>Servidores locales</li>
+            <li>Programación web</li>
+            <li>Desarrollo de software</li>
+            <li>Redes de computadoras</li>
+            <li>Seguridad informática</li>
+            <li>Inteligencia artificial básica</li>
+            <li>Desarrollo de aplicaciones móviles</li>
+          </ul>
+        </section>
         <section className="servicios bg-white rounded-lg shadow-xl p-6 mb-4">
           <h2 className="text-3xl font-extrabold text-indigo-600 mb-4 text-center">Mis Servicios</h2>
           <ul className="list-disc pl-6 text-lg">
