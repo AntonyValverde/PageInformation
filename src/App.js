@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import './App.css';
 import PageHead from './components/PageHead';
 import Loading from "./components/Loading";
-import Profile from './components/profile';
+import Profile from './components/profile';  // Asegúrate de que este nombre coincida con el archivo
 import 'tailwindcss/tailwind.css';
 import { FaJava, FaPython, FaHtml5, FaCss3Alt, FaPhp, FaBootstrap, FaJs } from 'react-icons/fa';
 import { FaPhoneAlt, FaEnvelope, FaUniversity, FaGithub, FaLinkedin, FaInstagram, FaFacebook } from 'react-icons/fa';
@@ -16,6 +16,7 @@ function App() {
   const [user] = useState("AntonyValverde");
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     const fetchRepos = async () => {
@@ -55,6 +56,10 @@ function App() {
   const closeModal = () => {
     setModalOpen(false);
     setSelectedImage("");
+  };
+
+  const toggleShowMore = () => {
+    setShowMore(!showMore);
   };
 
   return (
@@ -108,44 +113,52 @@ function App() {
                 <li>- Pruebas en múltiples dispositivos: $600</li>
               </ul>
             </li>
-            <li>
-              Soporte técnico: $20 por hora - incluye resolución de problemas y mantenimiento
-              <ul className="list-disc pl-6 text-lg">
-                <li>Costo por hora: $20</li>
-                <li>Ejemplo de servicio: Resolución de problemas: 2 horas = $40</li>
-                <li>Cambios de componentes: $50</li>
-              </ul>
-            </li>
-            <li>
-              Sistemas contables: $2500 - incluye análisis, desarrollo y soporte post-implementación
-              <ul className="list-disc pl-6 text-lg">
-                <li>Análisis: $700</li>
-                <li>Desarrollo: $1200</li>
-                <li>Soporte post-implementación: $600</li>
-              </ul>
-            </li>
-            <li>
-              Base de datos: $1000 - incluye diseño y optimización de bases de datos
-              <ul className="list-disc pl-6 text-lg">
-                <li>Diseño: $400</li>
-                <li>Optimización: $600</li>
-              </ul>
-            </li>
-            <li>
-              Programación de páginas informativas: $800 - incluye diseño, desarrollo y SEO básico
-              <ul className="list-disc pl-6 text-lg">
-                <li>Diseño: $300</li>
-                <li>Desarrollo: $400</li>
-                <li>SEO básico: $100</li>
-              </ul>
-            </li>
+            {showMore && (
+              <>
+                <li>
+                  Soporte técnico: $20 por hora - incluye resolución de problemas y mantenimiento
+                  <ul className="list-disc pl-6 text-lg">
+                    <li>Costo por hora: $20</li>
+                    <li>Ejemplo de servicio: Resolución de problemas: 2 horas = $40</li>
+                    <li>Cambios de componentes: $50</li>
+                  </ul>
+                </li>
+                <li>
+                  Sistemas contables: $2500 - incluye análisis, desarrollo y soporte post-implementación
+                  <ul className="list-disc pl-6 text-lg">
+                    <li>Análisis: $700</li>
+                    <li>Desarrollo: $1200</li>
+                    <li>Soporte post-implementación: $600</li>
+                  </ul>
+                </li>
+                <li>
+                  Base de datos: $1000 - incluye diseño y optimización de bases de datos
+                  <ul className="list-disc pl-6 text-lg">
+                    <li>Diseño: $400</li>
+                    <li>Optimización: $600</li>
+                  </ul>
+                </li>
+                <li>
+                  Programación de páginas informativas: $800 - incluye diseño, desarrollo y SEO básico
+                  <ul className="list-disc pl-6 text-lg">
+                    <li>Diseño: $300</li>
+                    <li>Desarrollo: $400</li>
+                    <li>SEO básico: $100</li>
+                  </ul>
+                </li>
+                <div className="mt-4 text-center text-gray-700">
+                  <p>Incluimos rebajas de hasta el 30% en servicios combinados.</p>
+                  {/* Calcula el total y muéstralo aquí */}
+                </div>
+              </>
+            )}
           </ul>
           <div className="mt-4 text-center text-gray-700">
-            <p>Incluimos rebajas de hasta el 30% en servicios combinados.</p>
-            {/* Calcula el total y muéstralo aquí */}
+            <button onClick={toggleShowMore} className="bg-indigo-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300">
+              {showMore ? "Mostrar Menos" : "Mostrar Más"}
+            </button>
           </div>
         </section>
-
         <section className="bg-white rounded-lg shadow-xl p-6 mb-4">
           <div className="flex flex-col items-center">
             <div className="text-center">
@@ -284,7 +297,6 @@ function App() {
           </div>
         </div>
       )}
-
 
       <footer className="bg-gradient-to-r from-purple-600 to-red-600 text-white p-8 text-center mt-auto">
         <div className="container mx-auto">
