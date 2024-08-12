@@ -297,8 +297,13 @@ function App() {
               </div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-blue-100 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer" onClick={() => handleImageClick('path/to/your/image3.jpg')}>
-                <p className="text-lg text-blue-600 underline">Título 3</p>
+              <div className="bg-blue-100 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer" onClick={() => handleImageClick('/titulos/Academic Process Mining Fundamentals.jpeg')}>
+                <p className="text-lg text-blue-600 underline">Academic Process Mining Fundamentals</p>
+              </div>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="bg-blue-100 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer" onClick={() => handleImageClick('/titulos/Celonis Foundations.jpeg')}>
+                <p className="text-lg text-blue-600 underline">Celonis Foundations</p>
               </div>
             </div>
             {/* Agrega más enlaces a imágenes según sea necesario */}
