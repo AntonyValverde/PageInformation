@@ -4,14 +4,34 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+// === DARK MODE AUTOMÁTICO SEGÚN EL SISTEMA ===
+const root = document.documentElement;
+const mq = window.matchMedia("(prefers-color-scheme: dark)");
+
+function applyTheme(e) {
+  if (e.matches) {
+    root.classList.add("dark");
+  } else {
+    root.classList.remove("dark");
+  }
+}
+
+// Tema inicial
+applyTheme(mq);
+
+// Escuchar cambios en todos los navegadores
+if (mq.addEventListener) {
+  mq.addEventListener("change", applyTheme);
+} else if (mq.addListener) {
+  mq.addListener(applyTheme);
+}
+// ==============================================
+
+const rootDOM = ReactDOM.createRoot(document.getElementById('root'));
+rootDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

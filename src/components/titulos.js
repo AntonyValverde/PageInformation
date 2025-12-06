@@ -1,9 +1,21 @@
 // courses.js
+// Lista de cursos y certificaciones adicionales
+
 const courses = [
-    { title: "Curso de React Avanzado", pdfLink: "/ruta/al/pdf/react_avanzado.pdf" },
-    { title: "Introducción a Python", pdfLink: "/ruta/al/pdf/intro_python.pdf" },
-    // Agrega más cursos según sea necesario
-  ];
-  
-  export default courses;
-  
+  {
+    title: "Curso de React Avanzado",
+    pdfLink: "/docs/courses/react_avanzado.pdf",
+    category: "Desarrollo Web",
+    level: "Avanzado",
+  },
+  {
+    title: "Introducción a Python",
+    pdfLink: "/docs/courses/intro_python.pdf",
+    category: "Programación",
+    level: "Básico",
+  },
+  // Agrega más cursos aquí
+];
+
+// Exportar como lista ordenada por título (mejor UX)
+export default courses.sort((a, b) => a.title.localeCompare(b.title));

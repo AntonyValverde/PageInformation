@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import "tailwindcss/tailwind.css";
 import PageHead from "./components/PageHead";
@@ -14,14 +14,25 @@ import DatabasesGrid from "./components/grids/DatabasesGrid";
 import ProjectsGrid from "./components/grids/ProjectsGrid";
 import CertificatesGallery from "./components/gallery/CertificatesGallery";
 import { useGithubRepos } from "./hooks/useGithubRepos.js";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 
 export default function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 700,          // duración de la animación en ms
+      easing: "ease-out-cubic",
+      once: true,             // solo la primera vez que aparece
+      offset: 60,             // se dispara un poco antes de entrar al viewport
+    });
+  }, []);
+  const { repos, loading, error } = useGithubRepos("AntonyValverde");
   const perfil = "./perfil.jpg";
-  const repos = useGithubRepos("AntonyValverde");
 
   return (
-    <div className="bg-gradient-to-r from-blue-200 to-indigo-200 min-h-screen flex flex-col">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-500 flex flex-col">
+
       <header className="shadow-lg">
         <PageHead />
       </header>
@@ -42,7 +53,10 @@ export default function App() {
         <Section title="Redes Sociales"><SocialLinks /></Section>
         <Section title="Lenguajes de Programación"><LanguagesGrid /></Section>
         <Section title="Gestores de Bases de Datos"><DatabasesGrid /></Section>
-        <Section title="Mis Proyectos"><ProjectsGrid repos={repos} /></Section>
+        <Section title="Mis Proyectos">
+          <ProjectsGrid repos={repos} loading={loading} error={error} />
+        </Section>
+
         <Section title="Otros Aprendizajes"><CertificatesGallery /></Section>
       </main>
 

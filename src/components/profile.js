@@ -1,67 +1,117 @@
 import React from "react";
+import { FaExternalLinkAlt, FaGlobe } from "react-icons/fa";
 
 export default function Profile(props) {
+  const { owner, name, private: isPrivate, html_url, homepage, language, topics } = props;
+
   return (
-    <article className="bg-gradient-to-r from-white to-gray-100 p-5 rounded-lg shadow-lg transform transition-transform hover:scale-105 hover:shadow-2xl">
-      <div className="flex items-center">
+    <article
+      className="
+        bg-white dark:bg-gray-800
+        border border-gray-200 dark:border-gray-700
+        rounded-2xl
+        p-6
+        shadow-md dark:shadow-none
+        transition-all duration-300
+        hover:scale-[1.02]
+        hover:shadow-xl
+        animate-fade-in
+      "
+    >
+      {/* Header */}
+      <div className="flex items-center gap-4">
         <img
-          src={props.owner.avatar_url}
-          alt={props.owner.login}
-          className="w-16 h-16 shadow-xl rounded-full border-4 border-indigo-500"
+          src={owner.avatar_url}
+          alt={owner.login}
+          className="
+            w-16 h-16 rounded-full 
+            border-2 border-indigo-500 
+            shadow-md
+          "
         />
-        <div className="ml-5">
-          <h2 className="font-bold text-xl text-indigo-600">{props.owner.login}</h2>
-          <p className="text-gray-800">{props.name}</p>
-          {props.private ? (
-            <p className="bg-red-600 py-1 px-2 rounded-lg shadow text-white text-xs inline-block opacity-75">
-              Private
-            </p>
-          ) : (
-            <p className="bg-green-600 py-1 px-2 rounded-lg shadow text-white text-xs inline-block opacity-75">
-              Public
-            </p>
-          )}
+
+        <div>
+          <h2 className="font-bold text-xl text-gray-900 dark:text-gray-100">
+            {owner.login}
+          </h2>
+
+          <p className="text-gray-700 dark:text-gray-300 text-sm">
+            {name}
+          </p>
+
+          <span
+            className={`
+              inline-block mt-2 text-xs px-2 py-1 rounded-md
+              ${isPrivate
+                ? "bg-red-600 text-white"
+                : "bg-green-600 text-white"}
+            `}
+          >
+            {isPrivate ? "Private" : "Public"}
+          </span>
         </div>
       </div>
-      <div className="mt-5 flex flex-col items-center">
-        <div className="flex space-x-4 mb-4">
+
+      {/* Buttons */}
+      <div className="mt-6 flex gap-4 justify-center">
+        <a
+          href={html_url}
+          target="_blank"
+          rel="noreferrer"
+          className="
+            flex items-center gap-2
+            bg-gray-100 dark:bg-gray-700
+            border border-gray-300 dark:border-gray-600
+            text-gray-800 dark:text-gray-200
+            px-4 py-2 rounded-xl
+            transition-all duration-300
+            hover:scale-105 hover:shadow-md
+          "
+        >
+          Ver Repositorio <FaExternalLinkAlt size={14} />
+        </a>
+
+        {homepage && (
           <a
-            className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors duration-300 shadow"
-            href={props.html_url}
+            href={homepage}
             target="_blank"
             rel="noreferrer"
+            className="
+              flex items-center gap-2
+              bg-indigo-600 dark:bg-indigo-500 
+              text-white px-4 py-2 rounded-xl
+              transition-all duration-300
+              hover:bg-indigo-700 dark:hover:bg-indigo-400
+              hover:scale-105 hover:shadow-md
+            "
           >
-            Ver Repositorio
+            Ver Demo <FaGlobe size={14} />
           </a>
-          {props.homepage && (
-            <a
-              className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-800 transition-colors duration-300 shadow"
-              href={props.homepage}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Ver en Vercel
-            </a>
-          )}
-        </div>
+        )}
       </div>
-      <div className="flex flex-col items-center mt-5">
-        <div className="overflow-x-auto w-full">
-          <ul className="text-xs flex items-center justify-center space-x-2">
-            <li className="py-1 px-2 text-white bg-green-600 opacity-75 rounded-lg shadow inline-block">
-              {props.language}
+
+      {/* Topics */}
+      <div className="mt-6">
+        <ul className="flex flex-wrap gap-2 justify-center text-xs">
+          {language && (
+            <li className="px-3 py-1 bg-indigo-600 text-white rounded-full">
+              {language}
             </li>
-            {props.topics &&
-              props.topics.map((topic, index) => (
-                <li
-                  key={index}
-                  className="py-1 px-2 text-white bg-green-600 opacity-75 rounded-lg shadow inline-block"
-                >
-                  {topic}
-                </li>
-              ))}
-          </ul>
-        </div>
+          )}
+
+          {topics?.map((topic, i) => (
+            <li
+              key={i}
+              className="
+                px-3 py-1 rounded-full 
+                bg-gray-200 dark:bg-gray-700 
+                text-gray-800 dark:text-gray-200
+              "
+            >
+              {topic}
+            </li>
+          ))}
+        </ul>
       </div>
     </article>
   );

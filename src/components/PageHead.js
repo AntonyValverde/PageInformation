@@ -1,11 +1,24 @@
-import React from 'react';
+// src/components/PageHead.js
+import React from "react";
 
-const PageHead = () => {
+export default function PageHead() {
   return (
-    <div className="text-center py-6 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-white shadow-lg">
-      <h1 className="text-5xl font-extrabold">Información Personal</h1>
-    </div>
+    <header
+  className="py-10 text-center bg-gray-800/50"
+  data-aos="fade-down"
+>
+
+      <h1
+        className="text-5xl font-extrabold tracking-tight text-indigo-400 animate-fade-in"
+      >
+        Información Personal
+      </h1>
+
+      <p
+        className="mt-2 text-gray-400 animate-fade-in-delay"
+      >
+        Portafolio profesional
+      </p>
+    </header>
   );
 }
-
-export default PageHead;

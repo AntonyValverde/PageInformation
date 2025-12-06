@@ -1,76 +1,120 @@
 import { useState } from "react";
+import { FaCheckCircle } from "react-icons/fa";
 
 export default function Pricing() {
   const [showMore, setShowMore] = useState(false);
+
+  const items = [
+    {
+      title: "Desarrollo de aplicaciones web",
+      price: "$1500",
+      details: [
+        "Incluye diseño, desarrollo y pruebas exhaustivas",
+        "Diseño: $500",
+        "Desarrollo: $500",
+        "Pruebas exhaustivas: $500",
+      ],
+    },
+    {
+      title: "Desarrollo de aplicaciones móviles",
+      price: "$2000",
+      details: [
+        "Incluye diseño, desarrollo y pruebas en múltiples dispositivos",
+        "Diseño: $700",
+        "Desarrollo: $700",
+        "Pruebas en múltiples dispositivos: $600",
+      ],
+    },
+  ];
+
+  const extraItems = [
+    {
+      title: "Soporte técnico",
+      price: "$20/hora",
+      details: [
+        "Incluye resolución de problemas y mantenimiento",
+        "Ejemplo: 2 horas = $40",
+        "Cambios de componentes: $50",
+      ],
+    },
+    {
+      title: "Sistemas contables",
+      price: "$2500",
+      details: ["Análisis: $700", "Desarrollo: $1200", "Soporte: $600"],
+    },
+    {
+      title: "Base de datos",
+      price: "$1000",
+      details: ["Diseño: $400", "Optimización: $600"],
+    },
+    {
+      title: "Páginas informativas",
+      price: "$800",
+      details: ["Diseño: $300", "Desarrollo: $400", "SEO: $100"],
+    },
+  ];
+
+  const allItems = showMore ? [...items, ...extraItems] : items;
+
   return (
-    <div>
-      <ul className="list-disc pl-6 text-lg">
-        <li>
-          Desarrollo de aplicaciones web:
-          <ul className="list-disc pl-6 text-lg">
-            <li>$1500 - incluye diseño, desarrollo y pruebas exhaustivas</li>
-            <li>- Diseño: $500</li>
-            <li>- Desarrollo: $500</li>
-            <li>- Pruebas exhaustivas: $500</li>
-          </ul>
-        </li>
-        <li>
-          Desarrollo de aplicaciones móviles:
-          <ul className="list-disc pl-6 text-lg">
-            <li>$2000 - incluye diseño, desarrollo y pruebas en múltiples dispositivos</li>
-            <li>- Diseño: $700</li>
-            <li>- Desarrollo: $700</li>
-            <li>- Pruebas en múltiples dispositivos: $600</li>
-          </ul>
-        </li>
+    <div className="space-y-6 animate-fade-in">
+      {allItems.map(({ title, price, details }) => (
+        <div
+          key={title}
+          className="
+            bg-gray-50 dark:bg-gray-800/50
+            border border-gray-200 dark:border-gray-700
+            rounded-2xl p-6
+            shadow-md dark:shadow-none
+            transition-all duration-300
+            hover:scale-[1.01] hover:shadow-lg
+          "
+        >
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">
+              {title}
+            </h3>
+            <span className="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">
+              {price}
+            </span>
+          </div>
 
-        {showMore && (
-          <>
-            <li>
-              Soporte técnico: $20 por hora - incluye resolución de problemas y mantenimiento
-              <ul className="list-disc pl-6 text-lg">
-                <li>Costo por hora: $20</li>
-                <li>Ejemplo: 2 horas = $40</li>
-                <li>Cambios de componentes: $50</li>
-              </ul>
-            </li>
-            <li>
-              Sistemas contables: $2500 - análisis, desarrollo y soporte post-implementación
-              <ul className="list-disc pl-6 text-lg">
-                <li>Análisis: $700</li>
-                <li>Desarrollo: $1200</li>
-                <li>Soporte: $600</li>
-              </ul>
-            </li>
-            <li>
-              Base de datos: $1000 - diseño y optimización
-              <ul className="list-disc pl-6 text-lg">
-                <li>Diseño: $400</li>
-                <li>Optimización: $600</li>
-              </ul>
-            </li>
-            <li>
-              Páginas informativas: $800 - diseño, desarrollo y SEO básico
-              <ul className="list-disc pl-6 text-lg">
-                <li>Diseño: $300</li>
-                <li>Desarrollo: $400</li>
-                <li>SEO: $100</li>
-              </ul>
-            </li>
-            <div className="mt-4 text-center text-gray-700">
-              <p>Incluimos rebajas de hasta el 30% en servicios combinados.</p>
-            </div>
-          </>
-        )}
-      </ul>
+          <ul className="space-y-2">
+            {details.map((d, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <FaCheckCircle
+                  size={18}
+                  className="text-indigo-600 dark:text-indigo-400 mt-[2px]"
+                />
+                <span className="text-gray-700 dark:text-gray-300">{d}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
 
-      <div className="mt-4 text-center text-gray-700">
+      {/* Botón Mostrar Más */}
+      <div className="text-center">
         <button
           onClick={() => setShowMore((v) => !v)}
-          className="bg-indigo-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition"
+          className="
+            mt-4 
+            bg-indigo-600 dark:bg-indigo-500 
+            text-white 
+            py-2 px-6 rounded-xl
+            shadow-md hover:shadow-lg
+            hover:bg-indigo-700 dark:hover:bg-indigo-400
+            transition-all duration-300
+          "
         >
           {showMore ? "Mostrar Menos" : "Mostrar Más"}
         </button>
+
+        {showMore && (
+          <p className="mt-4 text-gray-600 dark:text-gray-400 text-sm">
+            Incluimos rebajas de hasta el 30% en servicios combinados.
+          </p>
+        )}
       </div>
     </div>
   );
