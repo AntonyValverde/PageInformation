@@ -1,85 +1,316 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+@import "@fontsource-variable/inter/index.css";
+@import "@fontsource-variable/space-grotesk/index.css";
+@import "@fontsource-variable/jetbrains-mono/index.css";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+@custom-variant can-hover (@media (hover: hover) and (pointer: fine));
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ---------------- Tokens de tema ---------------- */
+
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #07080d;
+  --elevated: #0d0f17;
+  --surface: rgb(255 255 255 / 0.03);
+  --surface-hover: rgb(255 255 255 / 0.06);
+  --line: rgb(255 255 255 / 0.08);
+  --line-strong: rgb(255 255 255 / 0.16);
+  --fg: #e9ebf3;
+  --muted: #9ca2b8;
+  --accent: #6366f1;
+  --accent-soft: #818cf8;
+  --accent-2: #22d3ee;
+  --success: #34d399;
+
+  /* Tripletas RGB para el canvas y los brillos */
+  --fg-rgb: 233 235 243;
+  --accent-rgb: 129 140 248;
+  --accent-2-rgb: 34 211 238;
+  --glow-opacity: 0.35;
+  --grain-opacity: 0.045;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
- 
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f6f7fb;
+  --elevated: #ffffff;
+  --surface: rgb(255 255 255 / 0.7);
+  --surface-hover: rgb(255 255 255 / 0.95);
+  --line: #e2e5ee;
+  --line-strong: #c9cedd;
+  --fg: #0d1020;
+  --muted: #586079;
+  --accent: #4f46e5;
+  --accent-soft: #4f46e5;
+  --accent-2: #0891b2;
+  --success: #059669;
 
-/* ---------------- Animaciones ---------------- */
-
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  --fg-rgb: 13 16 32;
+  --accent-rgb: 79 70 229;
+  --accent-2-rgb: 8 145 178;
+  --glow-opacity: 0.18;
+  --grain-opacity: 0.03;
 }
 
-.animate-fade-in {
-  animation: fade-in 0.7s ease-out forwards;
+@theme inline {
+  --color-bg: var(--bg);
+  --color-elevated: var(--elevated);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-2: var(--accent-2);
+  --color-success: var(--success);
 }
 
-.animate-fade-in-delay {
-  animation: fade-in 1s ease-out forwards;
-}
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.92);
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Space Grotesk Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "Cascadia Code", Consolas, monospace;
+
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --breakpoint-3xl: 120rem;
+
+  --animate-aurora-1: aurora-1 26s ease-in-out infinite alternate;
+  --animate-aurora-2: aurora-2 32s ease-in-out infinite alternate;
+  --animate-aurora-3: aurora-3 22s ease-in-out infinite alternate;
+  --animate-spin-slow: spin 8s linear infinite;
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+  --animate-marquee-reverse: marquee var(--marquee-duration, 40s) linear infinite reverse;
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-ping-slow: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+  @keyframes aurora-1 {
+    0% { transform: translate3d(-10%, -10%, 0) scale(1); }
+    100% { transform: translate3d(15%, 10%, 0) scale(1.2); }
   }
-  to {
+  @keyframes aurora-2 {
+    0% { transform: translate3d(10%, 5%, 0) scale(1.1); }
+    100% { transform: translate3d(-15%, -10%, 0) scale(0.9); }
+  }
+  @keyframes aurora-3 {
+    0% { transform: translate3d(0, 10%, 0) scale(0.9); }
+    100% { transform: translate3d(-10%, -15%, 0) scale(1.15); }
+  }
+  @keyframes marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
+  @keyframes shimmer {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
+
+/* ---------------- Tipografía fluida ---------------- */
+
+@utility text-display {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 1rem + 7vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+}
+
+@utility text-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1rem + 3.5vw, 3.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+@utility text-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1rem + 0.7vw, 1.6rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+}
+
+@utility text-body {
+  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  line-height: 1.7;
+}
+
+@utility text-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(110deg, var(--accent-soft), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-brand {
+  background-image: linear-gradient(120deg, var(--accent), var(--accent-2));
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+
+@utility section-space {
+  padding-block: clamp(4.5rem, 8vw, 7.5rem);
+}
+
+/* Superficie de vidrio con borde fino */
+@utility glass {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* ---------------- Base ---------------- */
+
+@layer base {
+  html {
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100svh;
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  ::selection {
+    background: rgb(var(--accent-rgb) / 0.35);
+    color: var(--fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+/* Borde con gradiente animado (tarjetas destacadas) */
+.gradient-border {
+  position: relative;
+  isolation: isolate;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--angle, 0deg), transparent 0 25%, var(--accent-soft), var(--accent-2), transparent 75% 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: border-spin 6s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-spin {
+  to { --angle: 360deg; }
+}
+
+/* Spotlight: gradiente que sigue al cursor dentro de la tarjeta */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgb(var(--accent-rgb) / 0.14), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .spotlight:hover::after {
     opacity: 1;
-    transform: scale(1);
   }
 }
 
-.animate-scale-in {
-  animation: scale-in 0.25s ease-out forwards;
-}
-@keyframes fade-up {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Máscara para el marquee (desvanece los bordes) */
+.mask-fade-x {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
 }
 
-.animate-fade-up {
-  animation: fade-up 0.6s ease-out both;
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* Grano global */
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: var(--grain-opacity);
 }
 
-.animate-fadeIn {
-  animation: fadeIn 0.3s ease-out forwards;
+/* Transición de tema con View Transitions API */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
-@keyframes zoomIn3D {
-  0% {
-    opacity: 0;
-    transform: scale(0.6) rotateX(-20deg);
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotateX(0deg);
-  }
-}
-
-.animate-zoomIn3D {
-  animation: zoomIn3D 0.45s ease-out forwards;
 }
