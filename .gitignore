@@ -10,6 +10,11 @@
 
 # production
 /build
+/dist
+
+# Títulos originales: muestran el número de identificación y el repo es público.
+# Solo se publican las versiones de public/images/degrees (con el número tapado).
+/assets/originals/degrees/
 
 # misc
 .DS_Store

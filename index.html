@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Antony Valverde — Ingeniero en Sistemas</title>
+    <meta
+      name="description"
+      content="Portafolio de Antony Valverde, Ingeniero en Sistemas en Costa Rica. Desarrollo de aplicaciones web y móviles, bases de datos y soporte técnico."
+    />
+    <meta name="author" content="Antony Valverde" />
+    <meta name="theme-color" content="#07080d" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f6f7fb" media="(prefers-color-scheme: light)" />
+    <link rel="canonical" href="https://page-information-lac.vercel.app/" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CR" />
+    <meta property="og:url" content="https://page-information-lac.vercel.app/" />
+    <meta property="og:title" content="Antony Valverde — Ingeniero en Sistemas" />
+    <meta
+      property="og:description"
+      content="Desarrollo de aplicaciones web y móviles, bases de datos y soporte técnico. Conoce mis proyectos y servicios."
+    />
+    <meta property="og:image" content="https://page-information-lac.vercel.app/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <link rel="preconnect" href="https://api.github.com" crossorigin />
+    <link rel="preload" as="image" href="/images/perfil.webp" type="image/webp" fetchpriority="high" />
+
+    <style>
+      html { background: #07080d; }
+      html[data-theme="light"] { background: #f6f7fb; }
+      .boot { position: fixed; inset: 0; display: grid; place-items: center; }
+      /* Mismo tamaño y posición que el monograma de la intro (deja lugar para su texto) */
+      .boot svg { width: 80px; height: 80px; margin-bottom: 37px; }
+      @media (min-width: 768px) { .boot svg { width: 96px; height: 96px; } }
+    </style>
+    <script>
+      // Aplica el tema antes del primer pintado para evitar el parpadeo.
+      (function () {
+        var theme;
+        try { theme = localStorage.getItem("theme"); } catch (e) {}
+        if (theme !== "light" && theme !== "dark") {
+          theme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Antony Valverde",
+        "jobTitle": "Ingeniero en Sistemas",
+        "url": "https://page-information-lac.vercel.app/",
+        "image": "https://page-information-lac.vercel.app/images/perfil.webp",
+        "email": "mailto:antonyvalverde2003@gmail.com",
+        "address": { "@type": "PostalAddress", "addressCountry": "CR" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Universidad Nacional de Costa Rica" },
+        "hasCredential": [
+          {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "degree",
+            "name": "Bachillerato en Ingeniería en Sistemas de Información",
+            "dateCreated": "2026-05-29",
+            "recognizedBy": { "@type": "CollegeOrUniversity", "name": "Universidad Nacional de Costa Rica" }
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "degree",
+            "name": "Diplomado en Programación de Aplicaciones Informáticas",
+            "dateCreated": "2025-11-06",
+            "recognizedBy": { "@type": "CollegeOrUniversity", "name": "Universidad Nacional de Costa Rica" }
+          }
+        ],
+        "sameAs": [
+          "https://github.com/AntonyValverde",
+          "https://www.linkedin.com/in/antony-valverde-26a709274/",
+          "https://www.instagram.com/arvr_2003",
+          "https://www.facebook.com/antony.valverderojas"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <noscript>Necesitas habilitar JavaScript para ver este sitio.</noscript>
+    <div id="root">
+      <!-- Pantalla estática mientras carga el JS; React la reemplaza al montar -->
+      <div class="boot" aria-hidden="true">
+        <svg viewBox="0 0 32 32">
+          <defs>
+            <linearGradient id="boot-g" gradientUnits="userSpaceOnUse" x1="3" y1="7" x2="29" y2="25">
+              <stop offset="0" stop-color="#818cf8" />
+              <stop offset="1" stop-color="#22d3ee" />
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke="url(#boot-g)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.5 25 9.5 7 15.5 25" /><path d="M5.9 18.5h7.2" /><path d="M16.5 7 22.5 25 28.5 7" />
+          </g>
+        </svg>
+      </div>
+    </div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

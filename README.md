@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# Portafolio — Antony Valverde
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sitio personal de una sola página: presentación, stack, especialidades, proyectos (sincronizados desde GitHub), servicios con precios, certificaciones y contacto.
 
-## Available Scripts
+**Stack:** Vite · React 19 · Tailwind CSS v4 · Motion · Lenis · react-icons. Se publica en Vercel.
 
-In the project directory, you can run:
+## Scripts
 
-### `npm start`
+| Comando | Qué hace |
+|---|---|
+| `npm start` / `npm run dev` | Servidor de desarrollo en `http://localhost:5173` |
+| `npm run build` | Build de producción en `dist/` |
+| `npm run preview` | Sirve el build de producción |
+| `npm run optimize:images` | Regenera las imágenes de `public/` (WebP, favicon, imagen OG) a partir de `assets/originals/` |
+| `npm run capture:projects` | Captura la demo de cada repo con `homepage` y actualiza `src/data/projectPreviews.json` (requiere Chrome o Edge; usa `CHROME_PATH` para otra ruta) |
+| `npm run generate:icons` | Regenera `src/components/ui/icons.js` (íconos de la carga inicial) |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Dónde editar el contenido
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Todo el texto vive en `src/data/`:
 
-### `npm test`
+- `profile.js`: nombre, roles, bio, contacto, redes y enlaces del menú
+- `stack.js`: tecnologías y categorías del filtro
+- `skills.js`: especialidades (bento)
+- `services.js`: servicios, precios y desglose
+- `education.js`: títulos universitarios (imágenes en `assets/originals/degrees/`; el script tapa el número de identificación)
+- `certificates.js`: cursos y certificados (imágenes en `assets/originals/certificates/`; luego `npm run optimize:images`)
+- `projects.js`: repos destacados, repos ocultos y títulos/descripciones curados
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Los colores, tipografías y animaciones base están en `src/index.css` (tokens en `:root` y `[data-theme="light"]`).
 
-### `npm run build`
+## Estructura
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+src/
+  data/                   contenido
+  hooks/                  tema, scroll suave, scroll-spy, GitHub (con caché), media queries
+  lib/                    formato de fechas y nombres, colores de lenguajes, carga diferida de Motion
+  components/
+    background/           fondo interactivo (canvas + aurora + rejilla + grano)
+    layout/               navbar, menú móvil, intro, footer, cambio de tema
+    sections/             Hero y secciones (BelowFold se carga en un chunk aparte)
+    ui/                   Button, Card, Dialog, Reveal, FilterChips, Monogram, íconos
+scripts/                  optimización de imágenes, capturas de proyectos, íconos
+assets/originals/         imágenes fuente (no se publican)
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Accesibilidad y rendimiento
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Respeta `prefers-reduced-motion`: sin intro, fondo estático y animaciones reducidas.
+- Navegación por teclado, foco visible, modal con foco atrapado y cierre con `Esc`.
+- La carga inicial trae solo el Hero; el resto de secciones, Lenis y las funciones de animación de Motion se cargan aparte.
