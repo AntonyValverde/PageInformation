@@ -79,6 +79,11 @@ const DEGREES = {
   },
 };
 
+// Recortes de certificados escaneados (quita la marca de agua de CamScanner).
+const CERT_CROPS = {
+  "congreso-ciberseguridad.jpg": { left: 0, top: 0, width: 1500, height: 1212 },
+};
+
 // Tapa cada zona clonando el papel liso de la misma franja, a su derecha (conserva textura y tono).
 async function redact(input, zones) {
   const composites = [];
@@ -100,14 +105,15 @@ async function main() {
   await sharp(perfil).resize(640).webp({ quality: 80 }).toFile(path.join(OUT, "images", "perfil.webp"));
   await sharp(perfil).resize(320).webp({ quality: 78 }).toFile(path.join(OUT, "images", "perfil-320.webp"));
 
-  // Certificados: versión completa + miniatura
+  // Certificados: versión completa + miniatura (720 px: alcanza para la tarjeta ancha)
   const certDir = path.join(SRC, "certificates");
   for (const file of await readdir(certDir)) {
     const name = path.parse(file).name;
-    const input = path.join(certDir, file);
+    let input = path.join(certDir, file);
+    if (CERT_CROPS[file]) input = await sharp(input).extract(CERT_CROPS[file]).png().toBuffer();
     await sharp(input).resize({ width: 1400, withoutEnlargement: true }).webp({ quality: 82 })
       .toFile(path.join(OUT, "images", "certificates", `${name}.webp`));
-    await sharp(input).resize({ width: 560 }).webp({ quality: 74 })
+    await sharp(input).resize({ width: 720 }).webp({ quality: 74 })
       .toFile(path.join(OUT, "images", "certificates", `${name}-thumb.webp`));
   }
 

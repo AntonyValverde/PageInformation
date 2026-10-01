@@ -1,5 +1,15 @@
-// Datos tomados de cada certificado.
+// Datos tomados de cada certificado (del más reciente al más antiguo).
 export const certificates = [
+  {
+    id: "congreso-ciberseguridad",
+    title: "Congreso de Ciberseguridad",
+    type: "Participación",
+    issuer: "Fundación Konrad Adenauer · Agencia para el Desarrollo Zona Sur",
+    place: "Ciudad Neily",
+    date: "2025-09-27",
+    width: 1500,
+    height: 1212,
+  },
   {
     id: "celonis-foundations",
     title: "Celonis Foundations",

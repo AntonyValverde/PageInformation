@@ -219,22 +219,41 @@ export function Education() {
         Cursos y certificaciones
       </SubHeading>
 
-      <RevealGroup className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4" gap={0.08}>
-        {items.slice(degrees.length).map((c, i) => (
-          <RevealItem key={c.id}>
-            <Card as="article" className="group h-full overflow-hidden p-2">
-              <Thumb item={c} onOpen={() => setIndex(degrees.length + i)} className="aspect-[4/3]" />
-              <div className="flex items-start gap-3 p-4">
-                <FaAward aria-hidden="true" className="mt-1 shrink-0 text-accent-soft" />
-                <div>
-                  <h4 className="font-display leading-snug font-semibold">{c.title}</h4>
-                  <p className="mt-1 text-sm text-muted">{c.issuer}</p>
-                  <p className="mt-1 font-mono text-xs text-muted">{formatMonthYear(c.date)}</p>
+      <RevealGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" gap={0.08}>
+        {items.slice(degrees.length).map((c, i) => {
+          // El más reciente ocupa dos columnas cuando así la cuadrícula queda sin huecos
+          const wideSm = i === 0 && certificates.length % 2 === 1;
+          const wideLg = i === 0 && certificates.length % 3 === 2;
+          return (
+            <RevealItem
+              key={c.id}
+              className={clsx(wideSm ? "sm:col-span-2" : "sm:col-span-1", wideLg ? "lg:col-span-2" : "lg:col-span-1")}
+            >
+              <Card as="article" className="group flex h-full flex-col overflow-hidden p-2">
+                <Thumb
+                  item={c}
+                  onOpen={() => setIndex(degrees.length + i)}
+                  className={clsx(
+                    "aspect-[4/3]",
+                    wideSm ? "sm:aspect-[2/1]" : "sm:aspect-[4/3]",
+                    // 2.77:1 = misma altura que una miniatura 4:3 de la columna vecina
+                    wideLg ? "lg:aspect-[2.77/1]" : "lg:aspect-[4/3]",
+                  )}
+                />
+                <div className="flex items-start gap-3 p-4">
+                  <FaAward aria-hidden="true" className="mt-1 shrink-0 text-accent-soft" />
+                  <div>
+                    <h4 className="font-display leading-snug font-semibold">{c.title}</h4>
+                    <p className="mt-1 text-sm text-muted">{c.issuer}</p>
+                    <p className="mt-1 font-mono text-xs text-muted">
+                      {[c.type, c.place, formatMonthYear(c.date)].filter(Boolean).join(" · ")}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </Card>
-          </RevealItem>
-        ))}
+              </Card>
+            </RevealItem>
+          );
+        })}
       </RevealGroup>
 
       <Lightbox index={index} onClose={close} onChange={setIndex} />
