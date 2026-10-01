@@ -1,0 +1,14 @@
+{
+  "short_name": "Antony Valverde",
+  "name": "Antony Valverde — Ingeniero en Sistemas",
+  "lang": "es",
+  "icons": [
+    { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#07080d",
+  "background_color": "#07080d"
+}
